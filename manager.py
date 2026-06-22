@@ -1,10 +1,12 @@
 from typing import Any
 from facebook_api import FacebookAPI
+from instagram_api import InstagramAPI
 
 
 class Manager:
     def __init__(self):
         self.api = FacebookAPI()
+        self.instagram_api = InstagramAPI()
 
     def post_to_facebook(self, message: str) -> dict[str, Any]:
         return self.api.post_message(message)
@@ -168,3 +170,81 @@ class Manager:
 
     def get_page_info(self) -> dict[str, Any]:
         return self.api.get_page_info()
+
+    def post_image_to_instagram(self, image_url: str, caption: str) -> dict[str, Any]:
+        return self.instagram_api.post_image(image_url, caption)
+
+    def post_video_to_instagram(self, video_url: str, caption: str, media_type: str = "REELS") -> dict[str, Any]:
+        return self.instagram_api.post_video(video_url, caption, media_type)
+
+    def reply_to_instagram_comment(self, media_id: str, comment_id: str, message: str) -> dict[str, Any]:
+        return self.instagram_api.reply_to_comment(comment_id, message)
+
+    def get_instagram_posts(self) -> dict[str, Any]:
+        return self.instagram_api.get_posts()
+
+    def get_instagram_post_comments(self, media_id: str) -> dict[str, Any]:
+        return self.instagram_api.get_comments(media_id)
+
+    def delete_instagram_post(self, media_id: str) -> dict[str, Any]:
+        return self.instagram_api.delete_media(media_id)
+
+    def delete_instagram_comment(self, comment_id: str) -> dict[str, Any]:
+        return self.instagram_api.delete_comment(comment_id)
+
+    def hide_instagram_comment(self, comment_id: str) -> dict[str, Any]:
+        return self.instagram_api.hide_comment(comment_id)
+
+    def unhide_instagram_comment(self, comment_id: str) -> dict[str, Any]:
+        return self.instagram_api.unhide_comment(comment_id)
+
+    def delete_instagram_comment_from_post(self, media_id: str, comment_id: str) -> dict[str, Any]:
+        return self.instagram_api.delete_comment(comment_id)
+
+    def filter_negative_instagram_comments(self, comments: dict[str, Any]) -> list[dict[str, Any]]:
+        keywords = ["bad", "terrible", "awful", "hate", "dislike", "problem", "issue"]
+        return [c for c in comments.get("data", []) if any(k in c.get("text", "").lower() for k in keywords)]
+
+    def get_number_of_instagram_comments(self, media_id: str) -> int:
+        counts = self.instagram_api.get_media_counts(media_id)
+        return counts.get("comments_count", 0)
+
+    def get_number_of_instagram_likes(self, media_id: str) -> int:
+        counts = self.instagram_api.get_media_counts(media_id)
+        return counts.get("like_count", 0)
+
+    def get_instagram_post_insights(self, media_id: str) -> dict[str, Any]:
+        return self.instagram_api.get_bulk_insights(media_id, ["impressions", "reach", "engagement", "saved"])
+
+    def get_instagram_post_impressions(self, media_id: str) -> dict[str, Any]:
+        return self.instagram_api.get_insights(media_id, "impressions")
+
+    def get_instagram_post_reach(self, media_id: str) -> dict[str, Any]:
+        return self.instagram_api.get_insights(media_id, "reach")
+
+    def get_instagram_post_engagement(self, media_id: str) -> dict[str, Any]:
+        return self.instagram_api.get_insights(media_id, "engagement")
+
+    def get_instagram_post_saved(self, media_id: str) -> dict[str, Any]:
+        return self.instagram_api.get_insights(media_id, "saved")
+
+    def get_instagram_post_top_commenters(self, media_id: str) -> list[dict[str, Any]]:
+        comments = self.get_instagram_post_comments(media_id).get("data", [])
+        counter = {}
+        for comment in comments:
+            username = comment.get("username")
+            if username:
+                counter[username] = counter.get(username, 0) + 1
+        return sorted([{"username": k, "count": v} for k, v in counter.items()], key=lambda x: x["count"], reverse=True)
+
+    def send_instagram_dm_to_user(self, comment_id: str, message: str) -> dict[str, Any]:
+        return self.instagram_api.send_private_reply(comment_id, message)
+
+    def get_instagram_comment_replies(self, comment_id: str) -> dict[str, Any]:
+        return self.instagram_api.get_comment_replies(comment_id)
+
+    def get_instagram_post_permalink(self, media_id: str) -> dict[str, Any]:
+        return self.instagram_api.get_permalink(media_id)
+
+    def get_instagram_account_info(self) -> dict[str, Any]:
+        return self.instagram_api.get_account_info()

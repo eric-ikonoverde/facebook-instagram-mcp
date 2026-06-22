@@ -60,6 +60,34 @@ This MCP provides a suite of AI-callable tools that connect directly to a Facebo
 | `get_scheduled_posts`            | List all scheduled (unpublished) posts on the Page.         |
 | `get_page_info`                  | Get extended Page details (name, about, category, website). |
 
+### Instagram Tools
+
+| Tool                                      | Description                                                   |
+|-------------------------------------------|---------------------------------------------------------------|
+| `post_image_to_instagram`                 | Post an image with a caption to Instagram.                    |
+| `post_video_to_instagram`                 | Post a video or Reel with a caption to Instagram.             |
+| `reply_to_instagram_comment`              | Reply to a specific Instagram comment.                        |
+| `get_instagram_posts`                     | Retrieve recent Instagram media.                              |
+| `get_instagram_post_comments`             | Fetch comments on a given Instagram media object.             |
+| `delete_instagram_post`                   | Delete a specific Instagram media object by ID.               |
+| `delete_instagram_comment`                | Delete a specific Instagram comment by ID.                    |
+| `hide_instagram_comment`                  | Hide an Instagram comment from public view.                   |
+| `unhide_instagram_comment`                | Unhide a previously hidden Instagram comment.                 |
+| `delete_instagram_comment_from_post`      | Alias for deleting a comment from Instagram media.            |
+| `filter_negative_instagram_comments`      | Filter Instagram comments with negative sentiment keywords.   |
+| `get_number_of_instagram_comments`        | Count comments on an Instagram media object.                  |
+| `get_number_of_instagram_likes`           | Count likes on an Instagram media object.                     |
+| `get_instagram_post_insights`             | Fetch Instagram media insights.                               |
+| `get_instagram_post_impressions`          | Get Instagram media impressions.                              |
+| `get_instagram_post_reach`                | Get Instagram media reach.                                    |
+| `get_instagram_post_engagement`           | Get Instagram media engagement.                               |
+| `get_instagram_post_saved`                | Get Instagram media saves.                                    |
+| `get_instagram_post_top_commenters`       | Get the top commenters on Instagram media.                    |
+| `send_instagram_dm_to_user`               | Send a private reply to a user who commented.                 |
+| `get_instagram_comment_replies`           | Get all replies to a specific Instagram comment.              |
+| `get_instagram_post_permalink`            | Get the permalink URL of Instagram media.                     |
+| `get_instagram_account_info`              | Get Instagram account details.                                |
+
 ---
 
 ## 🚀 Setup & Installation
@@ -86,12 +114,14 @@ uv pip install -r requirements.txt
 
 ### 3. Set Up Environment
 
-Create a .env file in the root directory and add your Facebook Page credentials. 
+Create a .env file in the root directory and add your Facebook Page and Instagram credentials.
 You can obtain these from  https://developers.facebook.com/tools/explorer
 
 ```bash
 FACEBOOK_ACCESS_TOKEN=your_facebook_page_access_token
 FACEBOOK_PAGE_ID=your_page_id
+INSTAGRAM_USER_ID=your_instagram_business_or_creator_account_id
+INSTAGRAM_ACCESS_TOKEN=your_instagram_access_token_or_omit_to_use_facebook_token
 ```
 
 ## 🧩 Using with Claude Desktop

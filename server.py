@@ -304,3 +304,194 @@ def get_page_info() -> dict[str, Any]:
     """Get extended information about the Facebook Page."""
     return manager.get_page_info()
 
+
+@mcp.tool()
+def post_image_to_instagram(image_url: str, caption: str) -> dict[str, Any]:
+    """Post an image with a caption to the Instagram account.
+    Input: image_url (str), caption (str)
+    Output: dict of publish result
+    """
+    return manager.post_image_to_instagram(image_url, caption)
+
+
+@mcp.tool()
+def post_video_to_instagram(video_url: str, caption: str, media_type: str = "REELS") -> dict[str, Any]:
+    """Post a video or Reel with a caption to the Instagram account.
+    Input: video_url (str), caption (str), media_type (str)
+    Output: dict of publish result
+    """
+    return manager.post_video_to_instagram(video_url, caption, media_type)
+
+
+@mcp.tool()
+def reply_to_instagram_comment(media_id: str, comment_id: str, message: str) -> dict[str, Any]:
+    """Reply to a specific comment on an Instagram media object.
+    Input: media_id (str), comment_id (str), message (str)
+    Output: dict with reply creation status
+    """
+    return manager.reply_to_instagram_comment(media_id, comment_id, message)
+
+
+@mcp.tool()
+def get_instagram_posts() -> dict[str, Any]:
+    """Fetch the most recent Instagram media objects.
+    Input: None
+    Output: dict with list of media objects and metadata
+    """
+    return manager.get_instagram_posts()
+
+
+@mcp.tool()
+def get_instagram_post_comments(media_id: str) -> dict[str, Any]:
+    """Retrieve all comments for a given Instagram media object.
+    Input: media_id (str)
+    Output: dict with comment objects
+    """
+    return manager.get_instagram_post_comments(media_id)
+
+
+@mcp.tool()
+def delete_instagram_post(media_id: str) -> dict[str, Any]:
+    """Delete a specific Instagram media object.
+    Input: media_id (str)
+    Output: dict with deletion result
+    """
+    return manager.delete_instagram_post(media_id)
+
+
+@mcp.tool()
+def delete_instagram_comment(comment_id: str) -> dict[str, Any]:
+    """Delete a specific Instagram comment.
+    Input: comment_id (str)
+    Output: dict with deletion result
+    """
+    return manager.delete_instagram_comment(comment_id)
+
+
+@mcp.tool()
+def hide_instagram_comment(comment_id: str) -> dict[str, Any]:
+    """Hide an Instagram comment from public view."""
+    return manager.hide_instagram_comment(comment_id)
+
+
+@mcp.tool()
+def unhide_instagram_comment(comment_id: str) -> dict[str, Any]:
+    """Unhide a previously hidden Instagram comment."""
+    return manager.unhide_instagram_comment(comment_id)
+
+
+@mcp.tool()
+def delete_instagram_comment_from_post(media_id: str, comment_id: str) -> dict[str, Any]:
+    """Alias to delete a comment on an Instagram media object.
+    Input: media_id (str), comment_id (str)
+    Output: dict with deletion result
+    """
+    return manager.delete_instagram_comment_from_post(media_id, comment_id)
+
+
+@mcp.tool()
+def filter_negative_instagram_comments(comments: dict[str, Any]) -> list[dict[str, Any]]:
+    """Filter Instagram comments for basic negative sentiment.
+    Input: comments (dict)
+    Output: list of flagged negative comments
+    """
+    return manager.filter_negative_instagram_comments(comments)
+
+
+@mcp.tool()
+def get_number_of_instagram_comments(media_id: str) -> int:
+    """Count the number of comments on a given Instagram media object.
+    Input: media_id (str)
+    Output: integer count of comments
+    """
+    return manager.get_number_of_instagram_comments(media_id)
+
+
+@mcp.tool()
+def get_number_of_instagram_likes(media_id: str) -> int:
+    """Return the number of likes on an Instagram media object.
+    Input: media_id (str)
+    Output: integer count of likes
+    """
+    return manager.get_number_of_instagram_likes(media_id)
+
+
+@mcp.tool()
+def get_instagram_post_insights(media_id: str) -> dict[str, Any]:
+    """Fetch Instagram media insights metrics.
+    Input: media_id (str)
+    Output: dict with multiple metrics and their values
+    """
+    return manager.get_instagram_post_insights(media_id)
+
+
+@mcp.tool()
+def get_instagram_post_impressions(media_id: str) -> dict[str, Any]:
+    """Fetch total impressions of an Instagram media object.
+    Input: media_id (str)
+    Output: dict with total impression count
+    """
+    return manager.get_instagram_post_impressions(media_id)
+
+
+@mcp.tool()
+def get_instagram_post_reach(media_id: str) -> dict[str, Any]:
+    """Fetch reach of an Instagram media object.
+    Input: media_id (str)
+    Output: dict with reach count
+    """
+    return manager.get_instagram_post_reach(media_id)
+
+
+@mcp.tool()
+def get_instagram_post_engagement(media_id: str) -> dict[str, Any]:
+    """Fetch engagement of an Instagram media object.
+    Input: media_id (str)
+    Output: dict with engagement count
+    """
+    return manager.get_instagram_post_engagement(media_id)
+
+
+@mcp.tool()
+def get_instagram_post_saved(media_id: str) -> dict[str, Any]:
+    """Fetch saves of an Instagram media object.
+    Input: media_id (str)
+    Output: dict with save count
+    """
+    return manager.get_instagram_post_saved(media_id)
+
+
+@mcp.tool()
+def get_instagram_post_top_commenters(media_id: str) -> list[dict[str, Any]]:
+    """Get the top commenters on an Instagram media object.
+    Input: media_id (str)
+    Output: list of usernames with comment counts
+    """
+    return manager.get_instagram_post_top_commenters(media_id)
+
+
+@mcp.tool()
+def send_instagram_dm_to_user(comment_id: str, message: str) -> dict[str, Any]:
+    """Send an Instagram private reply to a user who commented.
+    Input: comment_id (str), message (str)
+    Output: dict of result from Instagram API
+    """
+    return manager.send_instagram_dm_to_user(comment_id, message)
+
+
+@mcp.tool()
+def get_instagram_comment_replies(comment_id: str) -> dict[str, Any]:
+    """Get all replies to a specific Instagram comment."""
+    return manager.get_instagram_comment_replies(comment_id)
+
+
+@mcp.tool()
+def get_instagram_post_permalink(media_id: str) -> dict[str, Any]:
+    """Get the permalink URL of an Instagram media object."""
+    return manager.get_instagram_post_permalink(media_id)
+
+
+@mcp.tool()
+def get_instagram_account_info() -> dict[str, Any]:
+    """Get extended information about the Instagram account."""
+    return manager.get_instagram_account_info()
